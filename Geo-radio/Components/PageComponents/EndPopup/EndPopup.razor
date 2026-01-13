@@ -1,0 +1,19 @@
+@using Geo_radio.Models
+@using Geo_radio.Services
+@inject GameState gameState
+@inject NavigationManager navigation
+@inject LeaderboardDbContext db
+
+<div class="backdrop">
+    <div class="popup">
+        <div class="info">
+                <p class="header">Total Score:</p>
+                <strong>@TotalScore</strong>
+
+                <p class="description">Enter a username to display on the leaderboard! (Optional)</p>
+                <input type="text" @bind="name"/>
+
+                <button @onclick="ReturnHome">Submit</button>
+        </div>
+    </div>
+</div>

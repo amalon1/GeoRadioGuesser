@@ -1,0 +1,14 @@
+@using Geo_radio.Services
+@using Geo_radio.Models
+@using System.Threading.Tasks
+@using Geo_radio.Services.CountryService
+@using Geo_radio.Services.UserService
+
+@inject UserService userService
+@inject CountryService countryService
+@inject IJSRuntime JS
+@inject GameState gameState
+
+<div id="map"></div>
+
+<button class="@Selected" @onclick="ProcessGuess">Submit</button>

@@ -1,0 +1,42 @@
+@page "/home"
+@rendermode InteractiveServer
+@using Geo_radio.Models
+@using Geo_radio.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Diagnostics.Metrics
+
+@inject NavigationManager navigation;
+@inject LeaderboardService ls;
+
+<PageTitle>Georadio</PageTitle>
+
+<div class="header">Georadio</div>
+
+<div class="playButton">
+    <button @onclick="PlayGame">Play</button>
+</div>
+
+<div class="leaderboardheader">Leaderboard:</div>
+
+<div class="container">
+    <table class="leaderboard">
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+
+        @if (scores is not null) {
+            @foreach (LeaderboardEntry entry in scores) {
+                <tr>
+                    <td>@counter:</td>
+                    <td>@entry.Name</td>
+                    <td>@entry.Score</td>
+                </tr>
+
+                counter++;
+            }
+        }
+
+    </table>
+</div>

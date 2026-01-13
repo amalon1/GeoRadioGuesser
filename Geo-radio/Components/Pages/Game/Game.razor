@@ -1,0 +1,53 @@
+@page "/game"
+@using Geo_radio.Services
+@using Geo_radio.Models
+@using System.Threading.Tasks
+@using Geo_radio.Services.CountryService
+@using Geo_radio.Services.TimerService
+@using Geo_radio.Services.UserService
+@rendermode InteractiveServer
+
+@inject RadioBrowserService radioBrowserService
+@inject UserService userService
+@inject TimerService timerService
+@inject CountryService countryService
+@inject GameState gameState
+@inject LeaderboardDbContext db
+
+<PageTitle>Game</PageTitle>
+
+@if (hasStarted) {
+    <div class="game">
+        <p>Georadio, a radio guessing game!</p>
+        <div class="gameInfo">
+            <span class="round">@gameState.Round/3</span>
+            <span class="score">
+                <div>Score:</div>
+                <div>@gameState.Score</div>
+            </span>
+            <span class="time">
+                <div>Time Elapsed:</div>
+                <div>@timerService.GetTimeFormatted()</div>
+            </span>
+        </div>
+
+        @if (!isLoading && @stations.Count > 0) {
+            <Player Url="@activeStation.Url" />
+        } else {
+            <p>Loading...</p>
+        }
+
+        <Map />
+
+        <Popup Visible="@isPopupVisible" ButtonText="@text" GuessedCountry="@userGuess" CorrectCountry="@correctGuess" StationName="@activeStation.Name" TimeElapsed="@timeElapsed" RoundScore="@roundScore" />
+
+        @if (hasEnded) {
+            <EndPopup TotalScore="gameState.Score" />
+        }
+
+    </div>
+} else {
+    <div class="loading">
+        <p>Loading...</p>
+    </div>   
+}

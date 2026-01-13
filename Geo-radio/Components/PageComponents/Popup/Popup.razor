@@ -1,0 +1,22 @@
+@using Geo_radio.Services.UserService
+
+@inject UserService userService
+
+@if (Visible) {
+    <div class="backdrop">
+        <div class="popup">
+            <div class="info">
+                <p>Guessed Country:</p>
+                <strong>@GuessedCountry</strong>
+                <p>Correct Country:</p>
+                <strong>@CorrectCountry</strong>
+                <p>Station:</p>
+                <strong>@StationName</strong>
+                <p>Time Elapsed: @TimeElapsed</p>
+                <p>Round Score: @RoundScore</p>
+                
+                <button @onclick="Close">@ButtonText</button>
+            </div>
+        </div>
+    </div>
+}
